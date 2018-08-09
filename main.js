@@ -14,7 +14,7 @@ var books = [
 var fetch = function (query) {
   // console.log(query);
   var searchQuery = "https://www.googleapis.com/books/v1/volumes?q=" + query;
-  // console.log(searchQuery);
+  console.log(searchQuery);
   $.ajax({
     method: "GET",
     url: searchQuery,
@@ -29,11 +29,13 @@ var fetch = function (query) {
 };
 
 var addBooks = function (data) {
+console.log(books);
   $('.books').empty();
     for (var i=0; i<10; i++) {
       // console.log(data.items[i]);
     books.push(data.items[i].volumeInfo);
   }
+  console.log(books);
   renderBooks();
   // console.log(books);
 };
@@ -60,6 +62,7 @@ renderBooks();
 
 //click handlers
 $('.search').on('click', function () {
+  books.length = 0;
   var search = $('#search-query').val();
   // console.log(search);
   fetch(search);
