@@ -12,7 +12,6 @@ var books = [
 //functions
 
 var fetch = function (query) {
-  // console.log(query);
   var searchQuery = "https://www.googleapis.com/books/v1/volumes?q=" + query;
   console.log(searchQuery);
   $.ajax({
@@ -29,22 +28,17 @@ var fetch = function (query) {
 };
 
 var addBooks = function (data) {
-console.log(books);
   $('.books').empty();
     for (var i=0; i<10; i++) {
       // console.log(data.items[i]);
     books.push(data.items[i].volumeInfo);
   }
-  console.log(books);
   renderBooks();
-  // console.log(books);
 };
 
 var renderBooks = function () {
-  // $('.books').empty();
 
   for (var i=0; i<books.length; i++){
-    // console.log(books[i]);
     var source = $('#book-template').html();
     var bookTemplate = Handlebars.compile(source);
     var bookInfo = bookTemplate(
@@ -62,8 +56,7 @@ renderBooks();
 
 //click handlers
 $('.search').on('click', function () {
-  books.length = 0;
+  books.length = 0;  //empties the array
   var search = $('#search-query').val();
-  // console.log(search);
   fetch(search);
 });
